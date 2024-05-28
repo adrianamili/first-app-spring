@@ -1,8 +1,10 @@
 package com.appexample.FirstApp.api.DTO;
 
+import jakarta.validation.constraints.NotEmpty;
+
 public class ProductDtoAdd {
 
-
+    @NotEmpty(message = "Trebuie completat numele produsului!")
     String name;
     int priceWithoutVAT;
     int VAT;

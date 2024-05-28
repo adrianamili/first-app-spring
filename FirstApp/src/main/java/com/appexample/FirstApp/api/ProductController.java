@@ -6,7 +6,7 @@ import com.appexample.FirstApp.domain.product.Product;
 import com.appexample.FirstApp.domain.product.ProductRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.appexample.FirstApp.api.exception.BadRequestException;
+import com.appexample.FirstApp.exception.BadRequestException;
 
 import java.util.List;
 
@@ -26,6 +26,10 @@ public class ProductController {
     @PostMapping("/add")
     Product add(@RequestBody ProductDtoAdd commandDto) {
         Product editProduct = new Product();
+
+        if (commandDto.getName() == null || commandDto.getName().equals(" ")) {
+            throw new BadRequestException("Trebuie completat un nume pentru produs!");
+        }
         editProduct.setName(commandDto.getName());
         editProduct.setVAT(commandDto.getVAT());
         editProduct.setPriceWithoutVAT(commandDto.getPriceWithoutVAT());
@@ -60,7 +64,7 @@ public class ProductController {
      * Discount utilizator
      */
 
-    @PostMapping("/checkout/discount/{id}")
+    @PostMapping("/checkout/discount/{id}*")
     Product discount(@PathVariable Integer id,
                      @RequestParam String discount) {
         Product productDiscount = productRepository.findById(id)

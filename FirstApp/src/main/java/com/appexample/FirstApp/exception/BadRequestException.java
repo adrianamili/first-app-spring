@@ -1,4 +1,4 @@
-package com.appexample.FirstApp.api.exception;
+package com.appexample.FirstApp.exception;
 
 import org.apache.catalina.filters.ExpiresFilter;
 import org.springframework.http.HttpStatus;
