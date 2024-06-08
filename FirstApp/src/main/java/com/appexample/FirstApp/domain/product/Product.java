@@ -12,6 +12,15 @@ public class Product {
     int priceWithoutVAT;
     int VAT;
     int priceWithVat;
+    Long categoryId;
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
 
     public int getId() {
         return id;

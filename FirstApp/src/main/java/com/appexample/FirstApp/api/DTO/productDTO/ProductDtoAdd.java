@@ -1,4 +1,4 @@
-package com.appexample.FirstApp.api.DTO;
+package com.appexample.FirstApp.api.DTO.productDTO;
 
 import jakarta.validation.constraints.NotEmpty;
 
@@ -9,6 +9,15 @@ public class ProductDtoAdd {
     int priceWithoutVAT;
     int VAT;
     int priceWithVat;
+    Long categoryId;
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
 
     public int getPriceWithoutVAT() {
         return priceWithoutVAT;

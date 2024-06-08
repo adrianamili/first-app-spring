@@ -1,7 +1,8 @@
-package com.appexample.FirstApp.api;
+package com.appexample.FirstApp.api.productController;
 
-import com.appexample.FirstApp.api.DTO.ProductDtoAdd;
-import com.appexample.FirstApp.api.DTO.ProductDtoUpdate;
+import com.appexample.FirstApp.api.DTO.productDTO.ProductDtoAdd;
+import com.appexample.FirstApp.api.DTO.productDTO.ProductDtoUpdate;
+import com.appexample.FirstApp.domain.category.CategoryRepository;
 import com.appexample.FirstApp.domain.product.Product;
 import com.appexample.FirstApp.domain.product.ProductRepository;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +16,11 @@ import java.util.List;
 public class ProductController {
 
     final ProductRepository productRepository;
+    final CategoryRepository categoryRepository;
 
-    public ProductController(ProductRepository productRepository) {
+    public ProductController(ProductRepository productRepository, CategoryRepository categoryRepository) {
         this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     /**
@@ -30,12 +33,25 @@ public class ProductController {
         if (commandDto.getName() == null || commandDto.getName().equals(" ")) {
             throw new BadRequestException("Trebuie completat un nume pentru produs!");
         }
+
+        categoryRepository.findById(commandDto.getCategoryId()).
+                orElseThrow(()-> new BadRequestException("Nu exista categoria selectata"));
+                
+                
         editProduct.setName(commandDto.getName());
         editProduct.setVAT(commandDto.getVAT());
         editProduct.setPriceWithoutVAT(commandDto.getPriceWithoutVAT());
         editProduct.setPriceWithVat(commandDto.getPriceWithVat());
+        editProduct.setCategoryId(commandDto.getCategoryId());
         return productRepository.save(editProduct);
     }
+    
+    @GetMapping("/category/{categoryId}")
+    List<Product>getAllProductsByCategoryId(
+        @PathVariable Long categoryID){
+    return productRepository.findAllByCategoryId(categoryID);
+        }
+    
 
     /**
      * UPDATE endpoint
@@ -59,6 +75,7 @@ public class ProductController {
 
         return productRepository.save(productUpdated);
     }
+    
 
     /**
      * Discount utilizator

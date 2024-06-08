@@ -1,4 +1,4 @@
-package com.appexample.FirstApp.api.DTO;
+package com.appexample.FirstApp.api.DTO.productDTO;
 
 public class ProductDtoUpdate {
 

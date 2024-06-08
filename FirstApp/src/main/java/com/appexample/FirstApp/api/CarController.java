@@ -1,10 +1,8 @@
 package com.appexample.FirstApp.api;
 
 import com.appexample.FirstApp.api.DTO.CarDtoAdd;
-import com.appexample.FirstApp.api.DTO.ProductDtoAdd;
 import com.appexample.FirstApp.domain.car.Car;
 import com.appexample.FirstApp.domain.car.CarRepository;
-import com.appexample.FirstApp.domain.product.Product;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

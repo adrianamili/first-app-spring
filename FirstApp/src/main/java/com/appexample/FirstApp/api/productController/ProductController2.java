@@ -1,4 +1,4 @@
-package com.appexample.FirstApp.api;
+package com.appexample.FirstApp.api.productController;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
